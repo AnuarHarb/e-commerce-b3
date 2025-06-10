@@ -19,7 +19,9 @@ const App = () => {
 
   return (
     <AppContainer>
-      <h1>My React app</h1>
+      <header>
+        <h1>My React app - {articulos.length}</h1>
+      </header>
 
       <div className="main-container">
         <section className="card-container">

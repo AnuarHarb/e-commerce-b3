@@ -46,7 +46,7 @@ export const Card = ({ titulo, descripcion, precio, setArticulos }) => {
 
   const actualizarCuenta = (tipo) => {
     if (cuenta > 0 && tipo === "resta") {
-      setCuenta(cuenta - 1);
+      setCuenta((prev) => prev + 1);
     }
 
     if (tipo === "suma") {
@@ -56,19 +56,26 @@ export const Card = ({ titulo, descripcion, precio, setArticulos }) => {
 
   const añadirAlCarrito = () => {
     setEnCarrito(true);
-    setArticulos([{ name: titulo, precio: precio }]);
+
+    const nuevoArticulo = {
+      nombre: titulo,
+      precio: precio,
+      cantidad: cuenta,
+    };
+
+    setArticulos((prev) => [...prev, nuevoArticulo]);
   };
 
   return (
     <StyledCard>
       <img src="/public/zapatos.webp"></img>
-      <div className={`card-descipcion-container ${enCarrito ? "activo" : ""}`}>
+      <div className={`card-descipcion-container ${enCarrito && "activo"}`}>
         <h2 className="titulo">
           {titulo} - {precio}
         </h2>
 
         {mostrarDescripcion ? (
-          <p className="card-descripcion-full">{descripcion}</p>
+          <p>{descripcion}</p>
         ) : (
           <div>
             <p className="card-descripcion-truncade">{descripcion}</p>
