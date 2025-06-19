@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import currency from "currency.js";
 
 const StyledCheckout = styled.section`
   border: 1px solid black;
@@ -11,11 +12,11 @@ const StyledCheckout = styled.section`
   }
 `;
 
-const articulos = {
-  nombre: "tenis",
-  precio: "400",
-  cantidad: 3,
-};
+// const articulos = {
+//   nombre: "tenis",
+//   precio: "400",
+//   cantidad: 3,
+// };
 
 export const Checkout = ({ articulos }) => {
   const [total, setTotal] = useState(0);
@@ -44,12 +45,12 @@ export const Checkout = ({ articulos }) => {
         <article key={articulo.nombre} className="articulo-en-carrito">
           <h2>{articulo.nombre}</h2>
           <p>{articulo.cantidad}</p>
-          <p>${articulo.precio}</p>
+          <p>${articulo.precio * articulo.cantidad}</p>
         </article>
       ))}
 
       <div>
-        <h2>total: ${total}</h2>
+        <h2>total: {currency(total).format()}</h2>
       </div>
     </StyledCheckout>
   );

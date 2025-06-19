@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import currency from "currency.js";
 
 const StyledCard = styled.article`
   border: 1px solid black;
@@ -39,7 +40,7 @@ const StyledCard = styled.article`
   }
 `;
 
-export const Card = ({ titulo, descripcion, precio, setArticulos }) => {
+export const Card = ({ titulo, descripcion, precio, img, setArticulos }) => {
   const [cuenta, setCuenta] = useState(0);
   const [enCarrito, setEnCarrito] = useState(false);
   const [mostrarDescripcion, setmostrarDescripcion] = useState(false);
@@ -68,10 +69,10 @@ export const Card = ({ titulo, descripcion, precio, setArticulos }) => {
 
   return (
     <StyledCard>
-      <img src="/public/zapatos.webp"></img>
+      <img src={img}></img>
       <div className={`card-descipcion-container ${enCarrito && "activo"}`}>
         <h2 className="titulo">
-          {titulo} - {precio}
+          {titulo} - {currency(precio).format({ precision: 0 })}
         </h2>
 
         {mostrarDescripcion ? (
